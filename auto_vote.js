@@ -7,6 +7,15 @@ async function wait(ms) {
 }
 
 async function runVote() {
+    // Check if the contest has ended (May 1st, 2026)
+    const currentDate = new Date();
+    const deadline = new Date('2026-05-01');
+    if (currentDate >= deadline) {
+        console.log('--- CONTEST ENDED ---');
+        console.log('Stopping automation as it is now May 1st or later.');
+        return;
+    }
+
     const browser = await chromium.launch({ headless: true });
     const page = await browser.newPage();
     let waitTime = 30 * 60 * 1000; // Default 30 minutes

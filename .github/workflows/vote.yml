@@ -1,6 +1,8 @@
 name: 24/7 Automated Voting
 
 on:
+  push:
+    branches: [master]
   schedule:
     # This runs every 30 minutes
     - cron: '*/30 * * * *'

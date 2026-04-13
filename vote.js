@@ -1,7 +1,16 @@
 const { chromium } = require('playwright');
 
 (async () => {
-    // Launch the browser in headless mode (change to headless: false to see the window)
+    // Check if the contest has ended (May 1st, 2026)
+    const currentDate = new Date();
+    const deadline = new Date('2026-05-01');
+    if (currentDate >= deadline) {
+        console.log('--- CONTEST ENDED ---');
+        console.log('The date is May 1st or later. The script will now stop.');
+        return;
+    }
+
+    // Launch the browser in headless mode
     const browser = await chromium.launch({ headless: true });
     const page = await browser.newPage();
 
