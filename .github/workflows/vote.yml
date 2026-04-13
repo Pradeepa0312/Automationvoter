@@ -1,0 +1,29 @@
+name: 24/7 Automated Voting
+
+on:
+  schedule:
+    # This runs every 30 minutes
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+    # This allows you to run it manually from the GitHub UI
+
+jobs:
+  vote:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Install Playwright Browsers
+        run: npx playwright install chromium --with-deps
+
+      - name: Run Voting Script
+        run: node vote.js
