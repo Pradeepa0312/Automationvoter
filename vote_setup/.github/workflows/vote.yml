@@ -2,11 +2,12 @@ name: 24/7 Automated Voting
 
 on:
   push:
-    branches:
-      - main
+    branches: [master]
   schedule:
-    - cron: '0,10,20,30,40,50 * * * *'
+    # Run every 10 minutes to ensure we catch the 30-minute voting window reliably
+    - cron: '*/10 * * * *'
   workflow_dispatch:
+    # This allows you to run it manually from the GitHub UI
 
 jobs:
   vote:
