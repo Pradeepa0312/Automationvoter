@@ -4,8 +4,8 @@ on:
   push:
     branches: [master]
   schedule:
-    # Run every 10 minutes to ensure we catch the 30-minute voting window reliably
-    - cron: '*/10 * * * *'
+    # Explicitly run at these minutes past the hour to trigger GitHub's scheduler
+    - cron: '0,10,20,30,40,50 * * * *'
   workflow_dispatch:
     # This allows you to run it manually from the GitHub UI
 
