@@ -5,8 +5,13 @@ on:
     branches:
       - main
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '0,10,20,30,40,50 * * * *'
+    - cron: '5,15,25,35,45,55 * * * *'
   workflow_dispatch:
+
+concurrency:
+  group: voting-automation
+  cancel-in-progress: false
 
 jobs:
   vote:
@@ -27,4 +32,4 @@ jobs:
         run: npx playwright install chromium --with-deps
 
       - name: Run Voting Script
-        run: node vote.js
+        run: node auto_vote.js
